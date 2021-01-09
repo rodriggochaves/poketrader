@@ -1,0 +1,20 @@
+<%# Maybe this screen can be a react component to make a nice interaction adding new pokemons to the trade %>
+
+<div class="container">
+  <h1>New trade</h1>
+
+  <%= form_tag exchanges_path do %>
+    <div class="row">
+      <div class="col">
+        <input class="form-control" type="text" name="left[]">
+      </div>
+
+      <div class="col">
+        <input class="form-control" type="text" name="right[]">
+      </div>
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-primary">
+  <% end %>
+</div>
