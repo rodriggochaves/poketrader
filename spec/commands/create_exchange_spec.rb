@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe CreateExchange do
   let(:bulbasaur) { create(:bulbasaur) }
-  let(:chamander) { create(:chamander) }
+  let(:charmander) { create(:charmander) }
   let(:squirtle) { create(:squirtle) }
-  let(:params) { { left: [chamander.name, squirtle.name], right: [bulbasaur.name] } }
+  let(:params) { { left: [charmander.name, squirtle.name], right: [bulbasaur.name] } }
 
   it "creates three new pokemon trades" do
     expect { CreateExchange.new(params).call }.to change(ExchangedPokemon, :count).by(3)

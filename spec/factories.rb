@@ -5,9 +5,9 @@ FactoryBot.define do
     base_experience { 64 }
   end
 
-  factory :chamander, class: Pokemon do
+  factory :charmander, class: Pokemon do
     id { 4 }
-    name { "chamander" }
+    name { "charmander" }
     base_experience { 62 }
   end
 
