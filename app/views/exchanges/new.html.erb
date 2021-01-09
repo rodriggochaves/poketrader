@@ -1,6 +1,12 @@
 <%# Maybe this screen can be a react component to make a nice interaction adding new pokemons to the trade %>
 
 <div class="container">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
   <h1>New trade</h1>
 
   <%= form_tag exchanges_path do %>

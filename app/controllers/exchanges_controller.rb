@@ -7,7 +7,7 @@ class ExchangesController < ApplicationController
 
   def create
     CreateExchange.new(exchange_params).call
-    head :ok
+    redirect_to new_exchange_path, notice: "Your Pokemons was sent successfully"
   end
 
   private

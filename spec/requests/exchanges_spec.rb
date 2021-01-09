@@ -10,9 +10,14 @@ RSpec.describe "Exchanges", type: :request do
     let(:bulbasaur) { create(:bulbasaur) }
     let(:charmander) { create(:charmander) }
 
-    it "responds with HTTP 200" do
+    it "responds with HTTP 302" do
       create_exchange_request
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(302)
+    end
+
+    it "sends a successful notice" do
+      create_exchange_request
+      expect(flash[:notice]).to eq("Your Pokemons was sent successfully")
     end
 
     it "creates a new exchange" do
