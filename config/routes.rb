@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "trades#new"
+  root "exchanges#new"
 
-  resources "trades", only: [:index, :new]
+  resources "exchanges", only: [:index, :new, :create]
 end
