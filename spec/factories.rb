@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :pokemons, aliases: [:bulbasaur], class: Pokemon do
+  factory :pokemon, aliases: [:bulbasaur], class: Pokemon do
     id { 1 }
     name { "bulbasaur" }
     base_experience { 64 }
@@ -15,5 +15,15 @@ FactoryBot.define do
     id { 7 }
     name { "squirtle" }
     base_experience { 63 }
+  end
+
+  factory :exchanged_pokemon do
+    side { ExchangedPokemon.sides['right'] }
+    pokemon
+    exchange
+  end
+
+
+  factory :exchange do
   end
 end
