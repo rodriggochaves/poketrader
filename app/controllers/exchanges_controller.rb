@@ -8,6 +8,8 @@ class ExchangesController < ApplicationController
   def create
     CreateExchange.new(exchange_params).call
     redirect_to new_exchange_path, notice: "Your Pokemons was sent successfully"
+  rescue FindOrFetchPokemon::PokemonNotFound => error
+    redirect_to new_exchange_path, alert: error.message
   end
 
   private

@@ -1,22 +1,20 @@
 require "rails_helper"
 
 RSpec.describe FindOrFetchPokemon do
-  subject(:find_pokemon) { FindOrFetchPokemon.new(name).call }
+  subject(:find_pokemon) { FindOrFetchPokemon.new(name, api: api).call }
+
   let(:name) { "bulbasaur" }
   let(:base_experience) { 64 }
-  let(:pokemon_api_double) { double(id: 1, name: name, base_experience: base_experience) }
+  let(:api) { double("Poke API", get: api_response) }
+  let(:api_response) { double(id: 1, name: name, base_experience: base_experience) }
 
   context "when querying a new pokemon" do
-    before do
-      allow(PokeApi).to receive(:get).and_return(pokemon_api_double)
-    end
-
     it "expects to call PokeApi with the pokemon name" do
-      expect(PokeApi).to receive(:get).with(pokemon: name)
+      expect(api).to receive(:get).with(pokemon: name)
       find_pokemon
     end
 
-    # EXTERNAL DEPENDENCY
+    # TODO: EXTERNAL DEPENDENCY
     it "expects to save in the database" do
       expect { find_pokemon }.to change(Pokemon, :count).by(1)
     end
@@ -35,6 +33,26 @@ RSpec.describe FindOrFetchPokemon do
     it "expects to return pokemon base experience" do
       pokemon = find_pokemon
       expect(pokemon.base_experience).to equal(base_experience)
+    end
+  end
+
+  context "when querying a misspelled pokemon" do
+    before do
+      allow(api).to receive(:get).and_raise(JSON::ParserError.new("783: unexpected token at 'Not Found'"))
+    end
+
+    it "expects to raise a PokemonNotFound exception" do
+      expect { find_pokemon }.to raise_error(FindOrFetchPokemon::PokemonNotFound)
+    end
+  end
+
+  context "when an unknown error happens" do
+    before do
+      allow(api).to receive(:get).and_raise(StandardError.new("unknown error"))
+    end
+
+    it "expects to raise a PokemonNotFound exception" do
+      expect { find_pokemon }.to raise_error(StandardError)
     end
   end
 end
