@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 2021_01_09_150548) do
     t.bigint "exchange_id", null: false
     t.index ["pokemon_id"], name: "index_exchanged_pokemons_on_pokemon_id"
   end
+
+  create_table "exchanges", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
     t.integer "base_experience"
