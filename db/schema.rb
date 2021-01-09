@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_150548) do
+ActiveRecord::Schema.define(version: 2021_01_09_174806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_150548) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "exchange_id", null: false
+    t.index ["exchange_id"], name: "index_exchanged_pokemons_on_exchange_id"
     t.index ["pokemon_id"], name: "index_exchanged_pokemons_on_pokemon_id"
   end
 
@@ -36,5 +37,6 @@ ActiveRecord::Schema.define(version: 2021_01_09_150548) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "exchanged_pokemons", "exchanges"
   add_foreign_key "exchanged_pokemons", "pokemons"
 end
