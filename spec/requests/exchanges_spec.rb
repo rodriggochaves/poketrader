@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Exchanges", type: :request do
-  # TODO: add webmock to fail these tests if they are requesting to PokeAPI
   describe "POST /exchanges" do
     subject(:create_exchange_request) do
       post "/exchanges", params: { left: [bulbasaur.name], right: [charmander.name] }
