@@ -1,14 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ExchangedPokemon, type: :model do
   describe "#side" do
     it "is valid with 'right'" do
-      exchanged_pokemon = build(:exchanged_pokemon, side: ExchangedPokemon.sides['right'])
+      exchanged_pokemon = build(:exchanged_pokemon, side: ExchangedPokemon.sides["right"])
       expect(exchanged_pokemon).to be_valid
     end
 
     it "is valid with 'left'" do
-      exchanged_pokemon = build(:exchanged_pokemon, side: ExchangedPokemon.sides['left'])
+      exchanged_pokemon = build(:exchanged_pokemon, side: ExchangedPokemon.sides["left"])
       expect(exchanged_pokemon).to be_valid
     end
 
@@ -18,7 +18,7 @@ RSpec.describe ExchangedPokemon, type: :model do
     end
 
     it "is invalid with value outside of enum" do
-      expect { build(:exchanged_pokemon, side: 'top') }.to raise_error(ArgumentError)
+      expect { build(:exchanged_pokemon, side: "top") }.to raise_error(ArgumentError)
     end
   end
 

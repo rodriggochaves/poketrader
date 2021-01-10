@@ -8,12 +8,12 @@ class CreateExchange
 
   def call
     @exchange = Exchange.create
-    exchange_pokemons(exchange)
+    exchange_pokemons
   end
 
   private
 
-  def exchange_pokemons(exchange)
+  def exchange_pokemons
     left_pokemons = exchange_side(left_side, ExchangedPokemon.sides[:left])
     right_pokemons = exchange_side(right_side, ExchangedPokemon.sides[:right])
     left_pokemons + right_pokemons

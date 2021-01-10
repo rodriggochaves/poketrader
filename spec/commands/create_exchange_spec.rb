@@ -16,6 +16,6 @@ RSpec.describe CreateExchange do
 
   it "expects to correctly save sides" do
     exchanged_pokemons = CreateExchange.new(params).call
-    expect(exchanged_pokemons.map(&:side)).to eq(["left", "left", "right"])
+    expect(exchanged_pokemons.map(&:side)).to eq(%w[left left right])
   end
 end
