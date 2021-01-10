@@ -8,6 +8,8 @@ class ExchangesController < ApplicationController
     redirect_to new_exchange_path, fairness_message
   rescue FindOrFetchPokemon::PokemonNotFound => exception
     redirect_to new_exchange_path, flash: { error: exception.message }
+  rescue StandardError
+    redirect_to new_exchange_path, flash: { error: "Unknown Error! Try again later!" }
   end
 
   private
