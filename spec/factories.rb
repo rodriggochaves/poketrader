@@ -18,11 +18,10 @@ FactoryBot.define do
   end
 
   factory :exchanged_pokemon do
-    side { ExchangedPokemon.sides['right'] }
+    side { ExchangedPokemon.sides["right"] }
     pokemon
     exchange
   end
-
 
   factory :exchange do
   end

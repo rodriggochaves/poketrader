@@ -1,4 +1,4 @@
-# TODO add dry transactions here
+# TODO: add dry transactions here
 class FindOrFetchPokemon
   class PokemonNotFound < StandardError
   end
@@ -16,16 +16,19 @@ class FindOrFetchPokemon
       @pokemon = Pokemon.create(id: pokemon_data.id, name: @name, base_experience: pokemon_data.base_experience)
     end
     pokemon
-  rescue JSON::ParserError => error
-    if error.message.scan(/not found/i)
-      raise PokemonNotFound.new("'#{name}' is not a pokemon")
-    else
-      raise error
-    end
+  rescue JSON::ParserError => exception
+    handle_error(exception)
   end
 
   private
+
   def pokemon
     @pokemon ||= Pokemon.find_by(name: name)
+  end
+
+  def handle_error(error)
+    raise PokemonNotFound, "'#{name}' is not a pokemon" if error.message.scan(/not found/i)
+
+    raise error
   end
 end
