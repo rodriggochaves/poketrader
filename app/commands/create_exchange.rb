@@ -1,14 +1,16 @@
 class CreateExchange
-  attr_reader :exchange, :left_side, :right_side
+  attr_reader :exchange, :left_side, :right_side, :find_pokemon
 
-  def initialize(params)
+  def initialize(params, **options)
     @left_side = params[:left]
     @right_side = params[:right]
+    @find_pokemon = options[:find_pokemon] || FindOrFetchPokemon
   end
 
   def call
-    @exchange = Exchange.create
+    @exchange = Exchange.new
     exchange_pokemons
+    exchange.save!
     exchange
   end
 
@@ -21,7 +23,7 @@ class CreateExchange
 
   def exchange_side(pokemon_names, side)
     pokemon_names.map do |pokemon_name|
-      pokemon = FindOrFetchPokemon.new(pokemon_name).call
+      pokemon = find_pokemon.new(pokemon_name).call
       ExchangedPokemon.create(pokemon: pokemon, side: side, exchange: exchange)
     end
   end
