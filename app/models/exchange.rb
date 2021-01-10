@@ -1,6 +1,8 @@
 class Exchange < ApplicationRecord
   has_many :exchanged_pokemons
 
+  scope :history, -> { order(created_at: :desc) }
+
   def fair?
     (side_score(&:left?) - side_score(&:right?)).abs < 10
   end
