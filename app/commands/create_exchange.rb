@@ -14,9 +14,9 @@ class CreateExchange
   private
 
   def exchange_pokemons
-    left_pokemons = exchange_side(left_side, ExchangedPokemon.sides[:left])
-    right_pokemons = exchange_side(right_side, ExchangedPokemon.sides[:right])
-    left_pokemons + right_pokemons
+    exchange_side(left_side, ExchangedPokemon.sides[:left])
+    exchange_side(right_side, ExchangedPokemon.sides[:right])
+    exchange
   end
 
   def exchange_side(pokemon_names, side)
