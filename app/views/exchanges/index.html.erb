@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>History</h1>
+  <br />
+
+  <% @exchanges.each do |exchange| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Trade #<%= exchange.id %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(exchange.created_at) %></h6>
+        <br />
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <% exchange.left_pokemons.each do |exchange_pokemon| %>
+                <p><%= exchange_pokemon.name %></p>
+              <% end %>
+            </div>
+            <div class="col">
+              <% exchange.right_pokemons.each do |exchange_pokemon| %>
+                <p><%= exchange_pokemon.name %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= fairness_footer(exchange) %>
+    </div>
+    <br />
+  <% end %>
+</div>

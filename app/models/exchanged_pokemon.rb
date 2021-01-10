@@ -12,4 +12,8 @@ class ExchangedPokemon < ApplicationRecord
   def score
     pokemon.base_experience
   end
+
+  def name
+    pokemon.name
+  end
 end
