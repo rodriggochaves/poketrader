@@ -53,6 +53,7 @@ group :development do
 end
 
 group :test do
+  gem "timecop", "~> 0.9.2"
   gem "webmock", "~> 3.11"
 end
 
