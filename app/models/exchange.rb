@@ -8,17 +8,20 @@ class Exchange < ApplicationRecord
   end
 
   def left_pokemons
-    exchanged_pokemons.includes(:pokemon).select(&:left?)
+    pokemons_exchange_side(&:left?)
   end
 
   def right_pokemons
-    exchanged_pokemons.includes(:pokemon).select(&:right?)
+    pokemons_exchange_side(&:right?)
   end
 
   private
 
   def side_score(&block)
-    side_exchanged_pokemons = exchanged_pokemons.includes(:pokemon).select(&block)
-    side_exchanged_pokemons.sum(&:score)
+    pokemons_exchange_side(&block).sum(&:score)
+  end
+
+  def pokemons_exchange_side(&block)
+    exchanged_pokemons.includes(:pokemon).select(&block)
   end
 end
