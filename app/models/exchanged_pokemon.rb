@@ -8,4 +8,8 @@ class ExchangedPokemon < ApplicationRecord
     left: 0,
     right: 1
   }
+
+  def score
+    pokemon.base_experience
+  end
 end
