@@ -7,6 +7,14 @@ class Exchange < ApplicationRecord
     (side_score(&:left?) - side_score(&:right?)).abs < 10
   end
 
+  def left_pokemons
+    exchanged_pokemons.includes(:pokemon).select(&:left?)
+  end
+
+  def right_pokemons
+    exchanged_pokemons.includes(:pokemon).select(&:right?)
+  end
+
   private
 
   def side_score(&block)

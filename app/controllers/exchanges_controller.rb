@@ -1,7 +1,9 @@
 class ExchangesController < ApplicationController
   def new; end
 
-  def index; end
+  def index
+    @exchanges = ExchangeHistory.new.call
+  end
 
   def create
     @exchange = CreateExchange.new(exchange_params).call
