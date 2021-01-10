@@ -62,6 +62,22 @@ RSpec.describe "Exchanges", type: :request do
     end
 
     context "when there is a unknown error" do
+      let(:create_exchange_command) { double("CreateExchange") }
+
+      before do
+        allow(CreateExchange).to receive(:new).and_return(create_exchange_command)
+        allow(create_exchange_command).to receive(:call).and_raise(StandardError.new("Unknown error"))
+      end
+
+      it "responds with HTTP 302" do
+        create_exchange_request
+        expect(response).to have_http_status(302)
+      end
+
+      it "sends an alert flash" do
+        create_exchange_request
+        expect(flash[:error]).to eq("Unknown Error! Try again later!")
+      end
     end
   end
 end
