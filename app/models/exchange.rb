@@ -1,5 +1,5 @@
 class Exchange < ApplicationRecord
-  has_many :exchanged_pokemons
+  has_many :exchanged_pokemons, dependent: :destroy
 
   scope :history, -> { order(created_at: :desc) }
 
