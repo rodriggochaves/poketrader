@@ -11,16 +11,22 @@ class FindOrFetchPokemon
   end
 
   def call
-    unless pokemon
-      pokemon_data = poke_api.get(pokemon: @name)
-      @pokemon = Pokemon.create(id: pokemon_data.id, name: @name, base_experience: pokemon_data.base_experience)
-    end
+    create_pokemon unless pokemon
     pokemon
   rescue JSON::ParserError => exception
     handle_error(exception)
   end
 
   private
+
+  def create_pokemon
+    pokemon_data = poke_api.get(pokemon: name)
+    @pokemon = Pokemon.create!(
+      poke_index: pokemon_data.id,
+      name: @name,
+      base_experience: pokemon_data.base_experience
+    )
+  end
 
   def pokemon
     @pokemon ||= Pokemon.find_by(name: name)
