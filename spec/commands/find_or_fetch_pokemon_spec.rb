@@ -5,8 +5,9 @@ RSpec.describe FindOrFetchPokemon do
 
   let(:name) { "bulbasaur" }
   let(:base_experience) { 64 }
+  let(:poke_index) { 1 }
   let(:api) { double("Poke API", get: api_response) }
-  let(:api_response) { double(id: 1, name: name, base_experience: base_experience) }
+  let(:api_response) { double(id: 1, name: name, base_experience: base_experience, poke_index: poke_index) }
 
   context "when querying a new pokemon" do
     it "expects to call PokeApi with the pokemon name" do
@@ -22,10 +23,9 @@ RSpec.describe FindOrFetchPokemon do
 
   context "when querying a existing pokemon" do
     before do
-      Pokemon.create!(id: 1, name: name, base_experience: base_experience)
+      create(:bulbasaur)
     end
 
-    # EXTERNAL DEPENDENCY
     it "expects to not save in the database" do
       expect { find_pokemon }.not_to change(Pokemon, :count)
     end

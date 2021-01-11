@@ -1,18 +1,18 @@
 FactoryBot.define do
   factory :pokemon, aliases: [:bulbasaur], class: Pokemon do
-    id { 1 }
+    poke_index { 1 }
     name { "bulbasaur" }
     base_experience { 64 }
   end
 
   factory :charmander, class: Pokemon do
-    id { 4 }
+    poke_index { 4 }
     name { "charmander" }
     base_experience { 62 }
   end
 
   factory :squirtle, class: Pokemon do
-    id { 7 }
+    poke_index { 7 }
     name { "squirtle" }
     base_experience { 63 }
   end
