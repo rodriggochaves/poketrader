@@ -9,12 +9,12 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import $ from "jquery";
 
-import ExchangeInputs from "./inputs";
+import setupPokemonInputs from "./setup-pokemon-inputs";
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
 $(function() {
-  ExchangeInputs.start()
+  setupPokemonInputs()
 })
