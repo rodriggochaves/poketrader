@@ -24,7 +24,7 @@ class CreateExchange
   def exchange_side(pokemon_names, side)
     pokemon_names.map do |pokemon_name|
       pokemon = find_pokemon.new(pokemon_name).call
-      ExchangedPokemon.create(pokemon: pokemon, side: side, exchange: exchange)
+      exchange.add_pokemon(pokemon, side)
     end
   end
 end
