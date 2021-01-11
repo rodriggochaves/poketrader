@@ -1,43 +1,54 @@
 require "rails_helper"
 
 RSpec.describe Exchange, type: :model do
-  let(:exchange) { create(:exchange) }
+  let(:exchange) { build(:exchange) }
   let(:left) { ExchangedPokemon.sides["left"] }
   let(:right) { ExchangedPokemon.sides["right"] }
 
-  it "has many exchanged pokemons" do
-    pokemons = [create(:charmander), create(:bulbasaur)]
-    pokemons.map { |pokemon| create(:exchanged_pokemon, exchange: exchange, pokemon: pokemon) }
+  it "expects to be invalid without at least one pokemon on each side" do
+    expect(exchange).to be_invalid
+  end
 
-    expect(exchange.reload.exchanged_pokemons.map(&:class).uniq).to eq([ExchangedPokemon])
+  it "expects to be valid with one pokemon on each side" do
+    exchange.add_pokemon(build(:charmander), left)
+    exchange.add_pokemon(build(:bulbasaur), right)
+
+    expect(exchange).to be_valid
+  end
+
+  it "has many exchanged pokemons" do
+    exchange.add_pokemon(build(:charmander), left)
+    exchange.add_pokemon(build(:bulbasaur), right)
+
+    expect(exchange.exchanged_pokemons.map(&:class).uniq).to eq([ExchangedPokemon])
   end
 
   describe "#fair?" do
-    let(:mewtwo) { create(:pokemon, name: "mewtwo", base_experience: 306) }
+    let(:mewtwo) { build(:pokemon, name: "mewtwo", base_experience: 306) }
 
     it "returns true when exchanges two pokemons with close base experience" do
-      create(:exchanged_pokemon, exchange: exchange, pokemon: create(:charmander), side: left)
-      create(:exchanged_pokemon, exchange: exchange, pokemon: create(:bulbasaur), side: right)
+      exchange.add_pokemon(build(:charmander), left)
+      exchange.add_pokemon(build(:bulbasaur), right)
 
       expect(exchange.fair?).to eq(true)
     end
 
     it "returns false when exchanges two pokemons with distant base experience" do
-      create(:exchanged_pokemon, exchange: exchange, pokemon: create(:charmander), side: left)
-      create(:exchanged_pokemon, exchange: exchange, pokemon: mewtwo, side: right)
+      exchange.add_pokemon(build(:charmander), left)
+      exchange.add_pokemon(mewtwo, right)
 
       expect(exchange.fair?).to eq(false)
     end
 
     it "returns true when exchanges many small base experience pokemons for one big experience" do
-      create_list(:exchanged_pokemon, 5, exchange: exchange, pokemon: create(:charmander), side: left)
-      create(:exchanged_pokemon, exchange: exchange, pokemon: mewtwo, side: right)
+      build_list(:charmander, 5).map { |charmander| exchange.add_pokemon(charmander, left) }
+      exchange.add_pokemon(mewtwo, right)
 
       expect(exchange.fair?).to eq(true)
     end
 
     it "returns false when exchange is one sided" do
-      create_list(:exchanged_pokemon, 2, exchange: exchange, pokemon: mewtwo, side: right)
+      build_list(:charmander, 2).map { |charmander| exchange.add_pokemon(charmander, left) }
 
       expect(exchange.fair?).to eq(false)
     end
