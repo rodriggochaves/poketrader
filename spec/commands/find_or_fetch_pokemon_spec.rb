@@ -45,14 +45,4 @@ RSpec.describe FindOrFetchPokemon do
       expect { find_pokemon }.to raise_error(FindOrFetchPokemon::PokemonNotFound)
     end
   end
-
-  context "when an unknown error happens" do
-    before do
-      allow(api).to receive(:get).and_raise(StandardError.new("unknown error"))
-    end
-
-    it "expects to raise a PokemonNotFound exception" do
-      expect { find_pokemon }.to raise_error(StandardError)
-    end
-  end
 end
