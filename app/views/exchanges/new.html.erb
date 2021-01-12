@@ -1,33 +1,4 @@
-<div class="container">
-  <%= render "notice" %>
-  <%= render "alert" %>
-  <%= render "error" %>
-
-  <h1>New trade</h1>
-  <br />
-
-  <%= form_tag exchanges_path do %>
-    <div class="row">
-      <div class="col">
-        <h3>Trainer 1</h3>
-        <div class="input-container">
-          <input class="pokemon-input form-control" type="text" name="left[]">
-        </div>
-        <br/>
-        <button class="add-new-pokemon btn btn-outline-dark">+</button>
-      </div>
-
-      <div class="col">
-        <h3>Trainer 2</h3>
-        <div class="input-container">
-          <input class="pokemon-input form-control" type="text" name="right[]">
-        </div>
-        <br/>
-        <button class="add-new-pokemon btn btn-outline-dark">+</button>
-      </div>
-    </div>
-
-    <br />
-    <input type="submit" class="btn btn-primary">
-  <% end %>
+<div id="poke-trader-app">
 </div>
+
+<%= javascript_pack_tag 'poke-trader-app' %>
