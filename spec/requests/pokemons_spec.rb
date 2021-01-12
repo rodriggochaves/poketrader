@@ -8,4 +8,66 @@ RSpec.describe "Pokemons", type: :request do
     end
   end
 
+  describe "POST /pokemons" do
+    subject(:create_pokemon) { post pokemons_path, params: { name: name } }
+
+    let(:name) { "groudon" }
+
+    context "with valid params" do
+      before do
+        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/groudon")
+          .to_return(status: 200, body: { name: "groudon", base_experience: 306, id: 383 }.to_json)
+      end
+
+      it "redirects to new_pokemon_path" do
+        create_pokemon
+        expect(response).to redirect_to(new_pokemon_path)
+      end
+
+      it "sends a flash notice" do
+        create_pokemon
+        expect(flash[:notice]).to eq("Pokemon created successfully")
+      end
+
+      it "creates a new pokemon querying the PokeAPI" do
+        expect { create_pokemon }.to change(Pokemon, :count).by(1)
+      end
+    end
+
+    context "with empty params" do
+      before do
+        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/groudon")
+          .to_return(status: 200, body: { name: "", base_experience: 306, id: 383 }.to_json)
+      end
+
+      it "redirects to new_pokemon_path" do
+        create_pokemon
+        expect(response).to redirect_to(new_pokemon_path)
+      end
+
+      it "sends a flash error" do
+        create_pokemon
+        expect(flash[:error]).to eq("Empty pokemon name")
+      end
+    end
+
+    context "with invalid params" do
+      let(:name) { "pudim" }
+
+      before do
+        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/#{name}")
+          .to_return(status: 200, body: "not found")
+      end
+
+      it "redirects to new_pokemon_path" do
+        create_pokemon
+        expect(response).to redirect_to(new_pokemon_path)
+      end
+
+      it "sends a flash error" do
+        create_pokemon
+        expect(flash[:error]).to eq("'pudim' is not a pokemon")
+      end
+    end
+  end
 end
