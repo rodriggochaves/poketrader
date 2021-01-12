@@ -1,6 +1,20 @@
 require "rails_helper"
 
 RSpec.describe "Pokemons", type: :request do
+  describe "GET" do
+    let!(:pokemons) { create_list(:pokemon, 3) }
+
+    it "returns HTTP 200" do
+      get pokemons_path
+      expect(response).to have_http_status(200)
+    end
+
+    it "returns a pokemon list" do
+      get pokemons_path
+      expect(JSON.parse(response.body).length).to eq(3)
+    end
+  end
+
   describe "GET /pokemons/new" do
     it "returns HTTP 200" do
       get new_pokemon_path
