@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import _ from "lodash";
 
 import ExchangeSide from "./exchange-side";
@@ -9,7 +9,7 @@ export default function ExchangeForm() {
   const allPokemons = usePokemons();
   const [leftPokemons, setLeftPokemons] = useState(_.times(6, () => null));
   const [rightPokemons, setRightPokemons] = useState(_.times(6, () => null));
-  const [fair, setFair] = useState(null);
+  const [fair, setFair] = useState(undefined);
 
   useFairnessEffect(leftPokemons, rightPokemons, setFair);
 

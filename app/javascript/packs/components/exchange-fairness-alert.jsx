@@ -17,7 +17,9 @@ function unfairExchange() {
 }
 
 export default function ExchangeFairness({ fair }) {
-  if (fair) {
+  if (typeof fair === "undefined") {
+    return null;
+  } else if (fair) {
     return fairExchange();
   } else {
     return unfairExchange();
