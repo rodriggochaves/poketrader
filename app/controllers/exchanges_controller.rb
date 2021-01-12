@@ -14,6 +14,11 @@ class ExchangesController < ApplicationController
     redirect_to new_exchange_path, flash: { error: "Unknown Error! Try again later!" }
   end
 
+  def simulate
+    @exchange = SimulateExchange.new(exchange_params).call
+    render json: { fair: @exchange.fair? }
+  end
+
   private
 
   def exchange_params
