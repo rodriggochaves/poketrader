@@ -1,4 +1,9 @@
 class PokemonsController < ApplicationController
+  def index
+    pokemons = GetPokemons.new.call
+    render json: pokemons
+  end
+
   def new; end
 
   def create
