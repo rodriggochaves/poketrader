@@ -11,7 +11,7 @@ class FetchPokemon
 
   def call
     @pokemon_data = poke_api.get(pokemon: name)
-    raise PokemonNotFound, "#{name} is not a pokemon" unless pokemon_data.name.present?
+    raise PokemonNotFound, "Empty pokemon name" unless pokemon_data.name.present?
 
     build_pokemon
   rescue JSON::ParserError => exception
@@ -29,7 +29,7 @@ class FetchPokemon
   end
 
   def handle_error(exception)
-    raise PokemonNotFound, "#{name} is not a pokemon" if exception.message.scan(/not found/i)
+    raise PokemonNotFound, "'#{name}' is not a pokemon" if exception.message.scan(/not found/i)
 
     raise exception
   end
