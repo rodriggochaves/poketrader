@@ -29,5 +29,4 @@ RSpec.describe SimulateExchange do
       expect(exchange.fair?).to be_falsy
     end
   end
-
 end
