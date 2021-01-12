@@ -13,11 +13,11 @@ class Exchange < ApplicationRecord
     (side_score(&:left?) - side_score(&:right?)).abs < 10
   end
 
-  def left_pokemons
+  def left_side
     pokemons_exchange_side(&:left?)
   end
 
-  def right_pokemons
+  def right_side
     pokemons_exchange_side(&:right?)
   end
 
@@ -32,7 +32,7 @@ class Exchange < ApplicationRecord
   end
 
   def at_least_one_pokemon_on_each_side?
-    return unless left_pokemons.empty? || right_pokemons.empty?
+    return unless left_side.empty? || right_side.empty?
 
     errors.add(:exchanged_pokemons, "needs at least one pokemon on each side")
   end
