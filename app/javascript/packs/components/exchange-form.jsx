@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 import _ from "lodash";
+
 import ExchangeSide from "./exchange-side";
+import ExchangeFairness from "./exchange-fairness-alert";
+import { usePokemons, useFairnessEffect } from "../functions/pokemons";
 
 export default function ExchangeForm() {
-  const [allPokemons, setAllPokemons] = useState([]);
-  const [leftPokemons, setLeftPokemons] = useState(_.times(6, () => {}));
-  const [rightPokemons, setRightPokemons] = useState(_.times(6, () => {}));
+  const allPokemons = usePokemons();
+  const [leftPokemons, setLeftPokemons] = useState(_.times(6, () => null));
+  const [rightPokemons, setRightPokemons] = useState(_.times(6, () => null));
+  const [fair, setFair] = useState(null);
 
-  useEffect(() => {
-    fetch("/pokemons")
-    .then((response) => {
-      return response.json();
-    }).then(pokemons => {
-      setAllPokemons(pokemons);
-    });
-  }, []);
+  useFairnessEffect(leftPokemons, rightPokemons, setFair);
 
   return (
     <>
+      <div className="row">
+        <div className="col">
+          <ExchangeFairness fair={fair} />
+        </div>
+      </div>
       <div className="row">
         <div className="col">
           <label htmlFor="left" className="form-label">Left side</label>

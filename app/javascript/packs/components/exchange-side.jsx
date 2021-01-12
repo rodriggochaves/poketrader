@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import _ from "lodash";
+import React from 'react'
 import ExchangeInput from "./exchange-input";
 
 export default function ExchangeSide({
   allPokemons,
-  setPokemons,
   pokemons,
-  side
+  setPokemons,
+  side,
 }) {
 
   function addPokemonToExchange(pokemon, index) {
-    pokemons[index] = pokemon;
-    setPokemons(pokemons);
+    const newPokemons = _.clone(pokemons)
+    newPokemons[index] = pokemon
+    setPokemons(newPokemons)
   }
 
   return pokemons.map((_pokemon, index) => {
