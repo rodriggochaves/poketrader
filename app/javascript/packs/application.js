@@ -11,10 +11,10 @@ import $ from "jquery";
 
 import setupPokemonInputs from "./setup-pokemon-inputs";
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+// Rails.start()
+// Turbolinks.start()
+// ActiveStorage.start()
 
-$(function() {
-  setupPokemonInputs()
-})
+// $(function() {
+//   setupPokemonInputs()
+// })

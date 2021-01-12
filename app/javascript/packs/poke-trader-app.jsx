@@ -1,26 +1,28 @@
-// Run this example by adding <%= javascript_pack_tag 'hello_react' %> to the head of your layout file,
-// like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
-// of the page.
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import ExchangeForm from "./components/exchange-form";
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+function PokeTraderAPP() {
+  return (
+    <div className="container">
+      <h1>PokeTrader</h1>
+      <br/>
 
-Hello.defaultProps = {
-  name: 'David'
-}
+      <div className="card">
+        <div className="card-body bg-light">
+          If a pokemon is missing from the list, you can add it on "Pokemons" menu.
+        </div>
+      </div>
+      <br/>
 
-Hello.propTypes = {
-  name: PropTypes.string
+      <ExchangeForm />
+    </div>
+  )
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <PokeTraderAPP />,
     document.querySelector("#poke-trader-app"),
   )
 })
