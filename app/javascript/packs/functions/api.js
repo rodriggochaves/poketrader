@@ -19,7 +19,7 @@ export async function postExchange(leftPokemons, rightPokemons) {
   })
 }
 
-export async function postFairness(leftPokemons, rightPokemons, setFair){
+export async function postFairness(leftPokemons, rightPokemons){
   const response = await fetch("/exchanges/simulate", {
     method: "POST",
     headers: {
@@ -31,7 +31,6 @@ export async function postFairness(leftPokemons, rightPokemons, setFair){
       right: rightPokemons
     })
   })
-  const { fair } = await response.json();
 
-  setFair(fair);
+  return response.json();
 }
