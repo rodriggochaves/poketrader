@@ -6,17 +6,14 @@ class ExchangesController < ApplicationController
   end
 
   def create
-    @exchange = CreateExchange.new(exchange_params).call
-    redirect_to new_exchange_path, fairness_message
-  rescue FindOrFetchPokemon::PokemonNotFound => exception
-    redirect_to new_exchange_path, flash: { error: exception.message }
-  rescue StandardError
-    redirect_to new_exchange_path, flash: { error: "Unknown Error! Try again later!" }
+    exchange = SimulateExchange.new(exchange_params).call
+    exchange.save!
+    head :ok
   end
 
   def simulate
-    @exchange = SimulateExchange.new(exchange_params).call
-    render json: { fair: @exchange.fair? }
+    exchange = SimulateExchange.new(exchange_params).call
+    render json: { fair: exchange.fair? }
   end
 
   private
