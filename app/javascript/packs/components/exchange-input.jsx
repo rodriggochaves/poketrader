@@ -4,13 +4,12 @@ import { Typeahead } from "react-bootstrap-typeahead";
 export default function ExchangeInput({
   sideKey,
   allPokemons = [],
-  pushPokemon
+  pushPokemon,
+  pokemon,
 }) {
-  const [pokemon, setPokemon] = useState({});
 
   function selectPokemon(pokemonArray) {
     const pokemon = pokemonArray[0];
-    setPokemon(pokemon);
     pushPokemon(pokemon);
   }
 
@@ -29,6 +28,7 @@ export default function ExchangeInput({
         labelKey={(option) => option.name}
         options={allPokemons}
         onChange={selectPokemon}
+        selected={[pokemon]}
       />
       <p>Base experience: {renderBaseExperience(pokemon)}</p>
     </>

@@ -5,8 +5,18 @@ export async function getAllPokemons(setPokemons) {
   setPokemons(pokemons);
 }
 
-function pokemonName(pokemon) {
-  return pokemon.name
+export async function postExchange(leftPokemons, rightPokemons) {
+  await fetch("/exchanges", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      left: leftPokemons,
+      right: rightPokemons
+    })
+  })
 }
 
 export async function postFairness(leftPokemons, rightPokemons, setFair){
@@ -17,8 +27,8 @@ export async function postFairness(leftPokemons, rightPokemons, setFair){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      left:leftPokemons.map(pokemonName),
-      right: rightPokemons.map(pokemonName)
+      left:leftPokemons,
+      right: rightPokemons
     })
   })
   const { fair } = await response.json();
