@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the Pokemon Trader calculator! Given a pair of trade, each with one to six
+pokemons, it says if was a fair or unfair trade, based on base experience status.
 
-Things you may want to cover:
+## How the code is organized here.
 
-* Ruby version
+Core of application resides:
 
-* System dependencies
+- We have `app/commands` to handle domain transactions.
+- We have `app/models` to abstract the domain entities.
+- We have `app/controllers` to handle web requests.
+- We have `app/javascript/poke-trader-app`. It is a React component to deliver a good experience when simulating
+  new exchanges.
 
-* Configuration
+## Web - Pages
 
-* Database creation
+You can access three main pages:
 
-* Database initialization
+- `/exchanges/new` is a React component to help simulate and persist new trades.
+- `/pokemons/new` is a page to fetch pokemons not registered yet.
+- `/exchanges` is a history page, showing every exchanges persisted.
 
-* How to run the test suite
+## HTTP API
 
-* Services (job queues, cache servers, search engines, etc.)
+You can access these endpoints:
 
-* Deployment instructions
+- `GET /pokemons` to return all pokemons persisted
+- `POST /exchanges` to persiste new trades
+- `POST /exchanges/simulate` to check if a trade is fair or not
 
-* ...
+## Entities
+
+This system was built on top of three main entities:
+
+1. `Pokemons` is the pokemons themselves. We record the name and base experience here.
+2. `Exchange` is a record of a trade.
+3. `ExchangedPokemon` is a record of a single pokemon inside a trade. An `Exchange`
+   is composed by many `ExchangedPokemons` and it can be `left` or `right` side.
