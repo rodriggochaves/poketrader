@@ -14,7 +14,3 @@ import setupPokemonInputs from "./setup-pokemon-inputs";
 // Rails.start()
 // Turbolinks.start()
 // ActiveStorage.start()
-
-// $(function() {
-//   setupPokemonInputs()
-// })
