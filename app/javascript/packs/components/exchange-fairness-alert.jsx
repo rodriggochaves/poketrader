@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function fairExchange() {
   return (
     <div className="alert alert-success" role="alert">
       This exchange is fair!
     </div>
-  )
+  );
 }
 
 function unfairExchange() {
@@ -13,7 +13,7 @@ function unfairExchange() {
     <div className="alert alert-warning" role="alert">
       This exchange is unfair!
     </div>
-  )
+  );
 }
 
 export default function ExchangeFairness({ fair }) {

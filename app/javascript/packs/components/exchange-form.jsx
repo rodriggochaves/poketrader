@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import _ from "lodash";
 
 import ExchangeSide from "./exchange-side";
@@ -7,7 +7,9 @@ import { usePokemons, useFairness } from "../functions/pokemons";
 import { postExchange } from "../functions/api";
 
 function pokemons(side) {
-  return side.filter(pokemon => !!pokemon?.name).map(pokemon => pokemon.name);
+  return side
+    .filter((pokemon) => !!pokemon?.name)
+    .map((pokemon) => pokemon.name);
 }
 
 function initialPokemonSlots() {
@@ -18,7 +20,6 @@ export default function ExchangeForm() {
   const allPokemons = usePokemons();
   const [leftSide, setLeftSide] = useState(initialPokemonSlots());
   const [rightSide, setRightSide] = useState(initialPokemonSlots());
-
 
   const leftPokemons = pokemons(leftSide);
   const rightPokemons = pokemons(rightSide);
@@ -42,7 +43,9 @@ export default function ExchangeForm() {
       </div>
       <div className="row">
         <div className="col">
-          <label htmlFor="left" className="form-label">Left side</label>
+          <label htmlFor="left" className="form-label">
+            Left side
+          </label>
           <ExchangeSide
             allPokemons={allPokemons}
             pokemons={leftSide}
@@ -51,7 +54,9 @@ export default function ExchangeForm() {
           />
         </div>
         <div className="col">
-          <label htmlFor="right" className="form-label">Right side</label>
+          <label htmlFor="right" className="form-label">
+            Right side
+          </label>
           <ExchangeSide
             allPokemons={allPokemons}
             pokemons={rightSide}
@@ -61,8 +66,10 @@ export default function ExchangeForm() {
         </div>
       </div>
 
-      <br/>
-      <button className="btn btn-primary" onClick={submitForm}>Submit trade!</button>
+      <br />
+      <button className="btn btn-primary" onClick={submitForm}>
+        Submit trade!
+      </button>
     </>
-  )
+  );
 }

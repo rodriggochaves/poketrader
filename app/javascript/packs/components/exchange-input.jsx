@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
 
 export default function ExchangeInput({
@@ -7,7 +7,7 @@ export default function ExchangeInput({
   pushPokemon,
   pokemon,
 }) {
-  const [currentPokemon, setCurrentPokemon] = useState([])
+  const [currentPokemon, setCurrentPokemon] = useState([]);
 
   function selectPokemon(pokemonArray) {
     setCurrentPokemon(pokemonArray);
@@ -17,15 +17,15 @@ export default function ExchangeInput({
   }
 
   function renderBaseExperience(pokemon) {
-    if(pokemon?.base_experience) {
-      return pokemon.base_experience
+    if (pokemon?.base_experience) {
+      return pokemon.base_experience;
     } else {
-      return "-"
+      return 0;
     }
   }
 
   if (pokemon?.name === "" && currentPokemon.length > 0) {
-    setCurrentPokemon([])
+    setCurrentPokemon([]);
   }
 
   return (
@@ -39,5 +39,5 @@ export default function ExchangeInput({
       />
       <p>Base experience: {renderBaseExperience(pokemon)}</p>
     </>
-  )
+  );
 }
