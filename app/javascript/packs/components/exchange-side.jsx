@@ -14,13 +14,14 @@ export default function ExchangeSide({
     setPokemons(newPokemons)
   }
 
-  return pokemons.map((_pokemon, index) => {
+  return pokemons.map((pokemon, index) => {
       return (
         <ExchangeInput
           key={`${side}-${index}`}
           sideKey={`${side}-${index}`}
           allPokemons={allPokemons}
-          pushPokemon={(pokemon) => addPokemonToExchange(pokemon, index)}
+          pushPokemon={(newPokemon) => addPokemonToExchange(newPokemon, index)}
+          pokemon={pokemon}
         />
       )
     })

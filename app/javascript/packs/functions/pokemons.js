@@ -11,21 +11,17 @@ export function usePokemons() {
   return allPokemons;
 }
 
-function pokemons(side) {
-  return side.filter(pokemon => pokemon);
-}
-
-export function useFairnessEffect(left, right, setFair) {
-  const initialRender = useRef(true);
+export function useFairness(leftPokemons, rightPokemons) {
+  const [fair, setFair] = useState(undefined);
 
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      postFairness(pokemons(left), pokemons(right), setFair);
+    if (leftPokemons.length > 0 && rightPokemons.length > 0) {
+      postFairness(leftPokemons, rightPokemons, setFair);
     }
   }, [
-    pokemons(left).length,
-    pokemons(right).length
+    leftPokemons.length,
+    rightPokemons.length
   ]);
+
+  return [fair, setFair];
 }
