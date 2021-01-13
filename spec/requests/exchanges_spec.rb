@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Exchanges", type: :request do
   let(:bulbasaur) { create(:bulbasaur) }
   let(:charmander) { create(:charmander) }
-  let(:mewtwo) { create(:pokemon, id: 150, name: "mewtwo", base_experience: 306) }
+  let(:mewtwo) { create(:mewtwo) }
   let(:params) { { left: [bulbasaur.name], right: [charmander.name] } }
 
   describe "POST /exchanges" do

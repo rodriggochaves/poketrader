@@ -24,7 +24,7 @@ RSpec.describe Exchange, type: :model do
   end
 
   describe "#fair?" do
-    let(:mewtwo) { build(:pokemon, name: "mewtwo", base_experience: 306) }
+    let(:mewtwo) { build(:mewtwo) }
 
     it "returns true when exchanges two pokemons with close base experience" do
       exchange.add_pokemon(build(:charmander), left)

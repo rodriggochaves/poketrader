@@ -17,4 +17,9 @@ FactoryBot.define do
     base_experience { 63 }
   end
 
+  factory :mewtwo, class: Pokemon do
+    poke_index { 150 }
+    name { "mewtwo" }
+    base_experience { 306 }
+  end
 end
