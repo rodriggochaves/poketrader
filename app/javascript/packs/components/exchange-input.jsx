@@ -7,8 +7,11 @@ export default function ExchangeInput({
   pushPokemon,
   pokemon,
 }) {
+  const [currentPokemon, setCurrentPokemon] = useState([])
 
   function selectPokemon(pokemonArray) {
+    setCurrentPokemon(pokemonArray);
+
     const pokemon = pokemonArray[0];
     pushPokemon(pokemon);
   }
@@ -21,6 +24,10 @@ export default function ExchangeInput({
     }
   }
 
+  if (pokemon?.name === "" && currentPokemon.length > 0) {
+    setCurrentPokemon([])
+  }
+
   return (
     <>
       <Typeahead
@@ -28,7 +35,7 @@ export default function ExchangeInput({
         labelKey={(option) => option.name}
         options={allPokemons}
         onChange={selectPokemon}
-        selected={[pokemon]}
+        selected={currentPokemon}
       />
       <p>Base experience: {renderBaseExperience(pokemon)}</p>
     </>
