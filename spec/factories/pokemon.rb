@@ -17,12 +17,4 @@ FactoryBot.define do
     base_experience { 63 }
   end
 
-  factory :exchanged_pokemon do
-    side { ExchangedPokemon.sides["right"] }
-    pokemon
-    exchange
-  end
-
-  factory :exchange do
-  end
 end
