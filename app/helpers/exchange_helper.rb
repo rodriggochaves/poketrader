@@ -9,16 +9,16 @@ module ExchangeHelper
 
   def fair_card_footer
     %(
-      <div class="card-footer text-white bg-success">
-        Fair trade
+      <div class="card-footer text-primary bg-light">
+        <b>Fair trade</b>
       </div>
     ).html_safe
   end
 
   def unfair_card_footer
     %(
-      <div class="card-footer text-white bg-warning">
-        Unfair trade
+      <div class="card-footer text-warning bg-light">
+        <b>Unfair trade</b>
       </div>
     ).html_safe
   end

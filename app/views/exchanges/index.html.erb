@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>History</h1>
+  <h1 class="display-1">History</h1>
   <br />
 
   <% @exchanges.each do |exchange| %>
@@ -11,13 +11,15 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <% exchange.left_pokemons.each do |exchange_pokemon| %>
-                <p><%= exchange_pokemon.name %></p>
+              <% exchange.left_side.each do |exchange_pokemon| %>
+                <p><strong><%= exchange_pokemon.name %></strong></p>
+                <p><small>Base Experience: <%= exchange_pokemon.score %></small></p>
               <% end %>
             </div>
             <div class="col">
-              <% exchange.right_pokemons.each do |exchange_pokemon| %>
-                <p><%= exchange_pokemon.name %></p>
+              <% exchange.right_side.each do |exchange_pokemon| %>
+                <p><strong><%= exchange_pokemon.name %></strong></p>
+                <p><small>Base Experience: <%= exchange_pokemon.score %></small></p>
               <% end %>
             </div>
           </div>
