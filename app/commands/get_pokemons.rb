@@ -1,5 +1,13 @@
 class GetPokemons
+  attr_reader :search
+
+  def initialize(search:)
+    @search = search
+  end
+
   def call
-    Pokemon.all
+    return [] unless search.present?
+
+    Pokemon.search(search)
   end
 end

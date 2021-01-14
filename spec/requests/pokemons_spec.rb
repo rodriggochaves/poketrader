@@ -2,16 +2,19 @@ require "rails_helper"
 
 RSpec.describe "Pokemons", type: :request do
   describe "GET" do
-    let!(:pokemons) { create_list(:pokemon, 3) }
+    let!(:charmander) { create(:charmander) }
 
     it "returns HTTP 200" do
-      get pokemons_path
+      get pokemons_path, params: { query: "char" }
       expect(response).to have_http_status(200)
     end
 
     it "returns a pokemon list" do
-      get pokemons_path
-      expect(JSON.parse(response.body).length).to eq(3)
+      get pokemons_path, params: { query: "char" }
+      expect(JSON.parse(response.body)).to include(hash_including({
+                                                                    "name" => charmander.name,
+                                                                    "base_experience" => charmander.base_experience
+                                                                  }))
     end
   end
 
