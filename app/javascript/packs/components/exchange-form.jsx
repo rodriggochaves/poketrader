@@ -29,8 +29,6 @@ export default function ExchangeForm() {
     await postExchange(leftPokemons, rightPokemons);
     alert("Exchange registered");
     setFair(undefined);
-    setLeftSide(initialPokemonSlots());
-    setRightSide(initialPokemonSlots());
   }
 
   return (
