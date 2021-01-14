@@ -1,38 +1,31 @@
 import React, { useState } from "react";
-import ExchangeInput from "./exchange-input";
 
-export default function ExchangeSide({
-  allPokemons,
-  pokemons,
-  addPokemonToExchangeSide,
-  side,
-}) {
+import ExchangeInput from "./exchange-input";
+import { searchPokemons } from "../functions/api";
+
+export default function ExchangeSide({ pokemons, addPokemon, side }) {
   const [pokemonOptions, setPokemonOptions] = useState([]);
 
-  function addPokemonToExchange(pokemon, index) {
+  function addPokemonToSide(pokemon, index) {
     const newPokemons = _.clone(pokemons);
     newPokemons[index] = pokemon;
-    addPokemonToExchangeSide(newPokemons);
+    addPokemon(newPokemons);
   }
 
-  async function updatePokemon(query, index) {
-    const params = new URLSearchParams({ query });
-    const response = await fetch(`/pokemons?${params.toString()}`);
-    const pokemonsResponse = await response.json();
-
-    setPokemonOptions(pokemonsResponse);
-    addPokemonToExchange(pokemonsResponse[0], index);
+  async function searchOnIndex(query, index) {
+    const pokemonResponse = await searchPokemons(query);
+    setPokemonOptions(pokemonResponse);
+    addPokemonToSide(pokemonResponse[0], index);
   }
 
   return pokemons.map((pokemon, index) => {
     return (
       <ExchangeInput
         key={`${side}-${index}`}
-        pokemonsOptions={pokemonOptions}
         pokemon={pokemon}
+        pokemonsOptions={pokemonOptions}
         sideKey={`${side}-${index}`}
-        updatePokemon={(query) => updatePokemon(query, index)}
-        onChange={(pokemons) => addPokemonToExchange(pokemons[0], index)}
+        onSearch={(query) => searchOnIndex(query, index)}
       />
     );
   });

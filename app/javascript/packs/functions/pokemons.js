@@ -1,15 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { getAllPokemons, postFairness } from "./api";
-
-export function usePokemons() {
-  const [allPokemons, setAllPokemons] = useState();
-
-  useEffect(() => {
-    getAllPokemons(setAllPokemons);
-  }, []);
-
-  return allPokemons;
-}
+import { useEffect, useState } from "react";
+import { postFairness } from "./api";
 
 function shouldUpdateFairness(leftPokemons, rightPokemons) {
   return leftPokemons.length > 0 && rightPokemons.length > 0;

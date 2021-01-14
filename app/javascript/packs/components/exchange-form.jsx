@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import ExchangeSide from "./exchange-side";
 import ExchangeFairness from "./exchange-fairness-alert";
-import { usePokemons, useFairness } from "../functions/pokemons";
+import { useFairness } from "../functions/pokemons";
 import { postExchange } from "../functions/api";
 
 function pokemons(side) {
@@ -17,7 +17,6 @@ function initialPokemonSlots() {
 }
 
 export default function ExchangeForm() {
-  const allPokemons = usePokemons();
   const [leftSide, setLeftSide] = useState(initialPokemonSlots());
   const [rightSide, setRightSide] = useState(initialPokemonSlots());
 
@@ -44,23 +43,21 @@ export default function ExchangeForm() {
       <div className="row">
         <div className="col">
           <label htmlFor="left" className="form-label">
-            Left side
+            <strong>Left side</strong>
           </label>
           <ExchangeSide
-            allPokemons={allPokemons}
             pokemons={leftSide}
-            addPokemonToExchangeSide={setLeftSide}
+            addPokemon={setLeftSide}
             side="left"
           />
         </div>
         <div className="col">
           <label htmlFor="right" className="form-label">
-            Right side
+            <strong>Right side</strong>
           </label>
           <ExchangeSide
-            allPokemons={allPokemons}
             pokemons={rightSide}
-            addPokemonToExchangeSide={setRightSide}
+            addPokemon={setRightSide}
             side="right"
           />
         </div>

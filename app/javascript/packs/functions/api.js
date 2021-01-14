@@ -1,8 +1,7 @@
-export async function getAllPokemons(setPokemons) {
-  const response = await fetch("/pokemons");
-  const pokemons = await response.json();
-
-  setPokemons(pokemons);
+export async function searchPokemons(query) {
+  const params = new URLSearchParams({ query });
+  const response = await fetch(`/pokemons?${params.toString()}`);
+  return response.json();
 }
 
 export async function postExchange(leftPokemons, rightPokemons) {
