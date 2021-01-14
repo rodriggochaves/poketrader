@@ -13,7 +13,7 @@ class ExchangesController < ApplicationController
 
   def simulate
     exchange = SimulateExchange.call(exchange_params)
-    render json: { fair: exchange.fair? }
+    render json: { fair: CheckFairness.call(exchange: exchange) }
   end
 
   private

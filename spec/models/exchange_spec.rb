@@ -22,35 +22,4 @@ RSpec.describe Exchange, type: :model do
 
     expect(exchange.exchanged_pokemons.map(&:class).uniq).to eq([ExchangedPokemon])
   end
-
-  describe "#fair?" do
-    let(:mewtwo) { build(:mewtwo) }
-
-    it "returns true when exchanges two pokemons with close base experience" do
-      exchange.add_pokemon(build(:charmander), left)
-      exchange.add_pokemon(build(:bulbasaur), right)
-
-      expect(exchange.fair?).to eq(true)
-    end
-
-    it "returns false when exchanges two pokemons with distant base experience" do
-      exchange.add_pokemon(build(:charmander), left)
-      exchange.add_pokemon(mewtwo, right)
-
-      expect(exchange.fair?).to eq(false)
-    end
-
-    it "returns true when exchanges many small base experience pokemons for one big experience" do
-      build_list(:charmander, 5).map { |charmander| exchange.add_pokemon(charmander, left) }
-      exchange.add_pokemon(mewtwo, right)
-
-      expect(exchange.fair?).to eq(true)
-    end
-
-    it "returns false when exchange is one sided" do
-      build_list(:charmander, 2).map { |charmander| exchange.add_pokemon(charmander, left) }
-
-      expect(exchange.fair?).to eq(false)
-    end
-  end
 end
