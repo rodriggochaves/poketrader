@@ -7,7 +7,7 @@ class ExchangesController < ApplicationController
 
   def create
     exchange = SimulateExchange.call(exchange_params)
-    exchange.save!
+    SaveExchange.call(exchange: exchange)
     head :ok
   end
 
