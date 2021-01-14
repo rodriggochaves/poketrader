@@ -1,4 +1,6 @@
 class Exchange < ApplicationRecord
+  POKEMON_EXCHANGE_MAX_DIFF = 10
+
   has_many :exchanged_pokemons, dependent: :destroy
 
   validate :at_least_one_pokemon_on_each_side?
@@ -10,7 +12,7 @@ class Exchange < ApplicationRecord
   end
 
   def fair?
-    (side_score(&:left?) - side_score(&:right?)).abs < 10
+    (side_score(&:left?) - side_score(&:right?)).abs < POKEMON_EXCHANGE_MAX_DIFF
   end
 
   def left_side
