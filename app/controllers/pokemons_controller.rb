@@ -8,9 +8,9 @@ class PokemonsController < ApplicationController
 
   def create
     pokemon = FetchPokemon.call(name: pokemon_params[:name])
-    pokemon.save!
+    SavePokemon.call(pokemon: pokemon)
     redirect_to new_pokemon_path, notice: "Pokemon created successfully"
-  rescue FetchPokemon::PokemonNotFound => exception
+  rescue FetchPokemon::PokemonNotFound, SavePokemon::AlreadyExistError => exception
     redirect_to new_pokemon_path, flash: { error: exception.message }
   end
 

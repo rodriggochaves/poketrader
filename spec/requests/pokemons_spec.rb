@@ -88,5 +88,24 @@ RSpec.describe "Pokemons", type: :request do
         expect(flash[:error]).to eq("'pudim' is not a pokemon")
       end
     end
+
+    context "with a already created pokemon" do
+      before do
+        create(:pokemon, name: name, poke_index: 383)
+
+        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/#{name}")
+          .to_return(status: 200, body: { name: name, base_experience: 306, id: 383 }.to_json)
+      end
+
+      it "redirects to new_pokemon_path" do
+        create_pokemon
+        expect(response).to redirect_to(new_pokemon_path)
+      end
+
+      it "sends a flash error" do
+        create_pokemon
+        expect(flash[:error]).to eq("groudon already exist")
+      end
+    end
   end
 end
