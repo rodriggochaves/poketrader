@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe FetchPokemon do
-  subject(:fetch_pokemon) { FetchPokemon.new(name: name, api: api).call }
+  subject(:fetch_pokemon) { FetchPokemon.call(name: name, api: api) }
 
   let(:name) { "groudon" }
   let(:api) { double("Poke API", get: pokemon) }

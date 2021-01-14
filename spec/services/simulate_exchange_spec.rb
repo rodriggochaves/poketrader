@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SimulateExchange do
-  subject(:exchange) { SimulateExchange.new(params).call }
+  subject(:exchange) { SimulateExchange.call(params) }
 
   let(:bulbasaur) { create(:bulbasaur) }
   let(:charmander) { create(:charmander) }

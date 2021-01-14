@@ -1,13 +1,13 @@
 class PokemonsController < ApplicationController
   def index
-    pokemons = GetPokemons.new(search: pokemon_search_params).call
+    pokemons = GetPokemons.call(search: pokemon_search_params)
     render json: pokemons
   end
 
   def new; end
 
   def create
-    pokemon = FetchPokemon.new(name: pokemon_name).call
+    pokemon = FetchPokemon.call(name: pokemon_params[:name])
     pokemon.save!
     redirect_to new_pokemon_path, notice: "Pokemon created successfully"
   rescue FetchPokemon::PokemonNotFound => exception
@@ -16,8 +16,8 @@ class PokemonsController < ApplicationController
 
   private
 
-  def pokemon_name
-    params.permit(:name)[:name]
+  def pokemon_params
+    params.permit(:name)
   end
 
   def pokemon_search_params

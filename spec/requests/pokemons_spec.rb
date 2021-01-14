@@ -52,8 +52,10 @@ RSpec.describe "Pokemons", type: :request do
     end
 
     context "with empty params" do
+      let(:name) { "" }
+
       before do
-        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/groudon")
+        stub_request(:get, "https://pokeapi.co/api/v2/pokemon/")
           .to_return(status: 200, body: { name: "", base_experience: 306, id: 383 }.to_json)
       end
 
