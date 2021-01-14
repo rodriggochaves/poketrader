@@ -1,6 +1,6 @@
 module ExchangeHelper
   def fairness_footer(exchange)
-    if exchange.fair?
+    if CheckFairness.call(exchange: exchange)
       fair_card_footer
     else
       unfair_card_footer

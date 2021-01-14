@@ -9,13 +9,13 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <% exchange.left_side.each do |exchange_pokemon| %>
+              <% exchange.left_side_pokemons.each do |exchange_pokemon| %>
                 <p><strong><%= exchange_pokemon.name %></strong></p>
                 <p><small>Base Experience: <%= exchange_pokemon.score %></small></p>
               <% end %>
             </div>
             <div class="col">
-              <% exchange.right_side.each do |exchange_pokemon| %>
+              <% exchange.right_side_pokemons.each do |exchange_pokemon| %>
                 <p><strong><%= exchange_pokemon.name %></strong></p>
                 <p><small>Base Experience: <%= exchange_pokemon.score %></small></p>
               <% end %>
