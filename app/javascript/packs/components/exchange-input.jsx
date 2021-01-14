@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 
+function renderBaseExperience(pokemon) {
+  if (pokemon?.base_experience) {
+    return pokemon.base_experience;
+  } else {
+    return 0;
+  }
+}
+
 export default function ExchangeInput({
   pokemon,
   pokemonsOptions = [],
   sideKey,
-  updatePokemon,
+  onSearch,
 }) {
   const [isLoading, setLoading] = useState(false);
   const [selectedPokemons, setSelectedPokemons] = useState([]);
 
-  function renderBaseExperience(pokemon) {
-    if (pokemon?.base_experience) {
-      return pokemon.base_experience;
-    } else {
-      return 0;
-    }
-  }
-
   async function handleSearch(query) {
     setLoading(true);
-    await updatePokemon(query);
+    await onSearch(query);
     setLoading(false);
   }
 
