@@ -2,11 +2,10 @@
   <h1 class="display-2 mb-2">History</h1>
 
   <% @exchanges.each do |exchange| %>
-    <div class="card">
+    <div class="card mb-4">
       <div class="card-body">
         <h5 class="card-title">Trade #<%= exchange.id %></h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(exchange.created_at) %></h6>
-        <br />
+        <h6 class="card-subtitle mb-4 text-muted"><%= time_ago_in_words(exchange.created_at) %></h6>
         <div class="container-fluid">
           <div class="row">
             <div class="col">
@@ -26,6 +25,5 @@
       </div>
       <%= fairness_footer(exchange) %>
     </div>
-    <br />
   <% end %>
 </div>

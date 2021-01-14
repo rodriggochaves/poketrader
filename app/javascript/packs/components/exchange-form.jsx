@@ -35,7 +35,7 @@ export default function ExchangeForm() {
 
   return (
     <>
-      <div className="row">
+      <div className="row mb-2">
         <div className="col">
           <ExchangeFairness fair={fair} />
         </div>
@@ -63,7 +63,6 @@ export default function ExchangeForm() {
         </div>
       </div>
 
-      <br />
       <button className="btn btn-primary" onClick={submitForm}>
         Submit trade!
       </button>
