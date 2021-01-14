@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
   def index
-    pokemons = GetPokemons.new.call
+    pokemons = GetPokemons.new(search: pokemon_search_params).call
     render json: pokemons
   end
 
@@ -18,5 +18,9 @@ class PokemonsController < ApplicationController
 
   def pokemon_name
     params.permit(:name)[:name]
+  end
+
+  def pokemon_search_params
+    params[:query]
   end
 end
