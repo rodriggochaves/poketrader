@@ -1,4 +1,3 @@
-# TODO: add dry transactions here
 class FindOrFetchPokemon
   class PokemonNotFound < StandardError
   end
