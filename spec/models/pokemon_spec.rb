@@ -10,4 +10,9 @@ RSpec.describe Pokemon, type: :model do
     pokemon = build(:pokemon, poke_index: nil)
     expect(pokemon).to be_invalid
   end
+
+  it "validates pokemons poke_index uniqueness" do
+    create(:charmander)
+    expect(build(:charmander)).to be_invalid
+  end
 end
