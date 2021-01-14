@@ -1,4 +1,6 @@
 class GetPokemons
+  extend ApplicationService
+
   attr_reader :search
 
   def initialize(search:)

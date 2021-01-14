@@ -1,4 +1,6 @@
 class FetchPokemon
+  extend ApplicationService
+
   class PokemonNotFound < StandardError
   end
 

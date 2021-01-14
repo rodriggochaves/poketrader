@@ -1,4 +1,6 @@
 class SimulateExchange
+  extend ApplicationService
+
   attr_reader :exchange, :left_side, :right_side
 
   def initialize(params)
