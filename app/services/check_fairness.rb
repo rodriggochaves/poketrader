@@ -1,4 +1,6 @@
 class CheckFairness
+  POKEMON_EXCHANGE_MAX_DIFF = 10
+
   extend ApplicationService
 
   attr_reader :exchange
@@ -8,7 +10,7 @@ class CheckFairness
   end
 
   def call
-    absolute_difference < 10
+    absolute_difference < POKEMON_EXCHANGE_MAX_DIFF
   end
 
   private
