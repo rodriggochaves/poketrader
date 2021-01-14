@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { searchPokemons } from "../functions/api";
 
 function renderBaseExperience(pokemon) {
   if (pokemon?.base_experience) {
@@ -9,39 +10,36 @@ function renderBaseExperience(pokemon) {
   }
 }
 
-export default function ExchangeInput({
-  pokemon,
-  pokemonsOptions = [],
-  sideKey,
-  onSearch,
-}) {
+export default function ExchangeInput({ inputId, addPokemon }) {
   const [isLoading, setLoading] = useState(false);
-  const [selectedPokemons, setSelectedPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   async function handleSearch(query) {
     setLoading(true);
-    await onSearch(query);
+    const pokemonResponse = await searchPokemons(query);
+    setPokemons(pokemonResponse);
     setLoading(false);
   }
 
-  if (pokemon?.name === "" && selectedPokemons.length > 0) {
-    setSelectedPokemons([]);
+  function onChange(pokemons) {
+    setSelectedPokemon(pokemons[0]);
+    addPokemon(pokemons[0]);
   }
 
   return (
     <>
       <AsyncTypeahead
-        id={sideKey}
+        id={inputId}
         isLoading={isLoading}
         filterBy={() => true}
         labelKey={(option) => option.name}
-        options={pokemonsOptions}
-        onChange={setSelectedPokemons}
-        selected={selectedPokemons}
+        options={pokemons}
         onSearch={handleSearch}
-        minLength={2}
+        onChange={onChange}
+        minLength={3}
       />
-      <p>Base experience: {renderBaseExperience(selectedPokemons[0])}</p>
+      <p>Base experience: {renderBaseExperience(selectedPokemon)}</p>
     </>
   );
 }
