@@ -49,7 +49,7 @@ export default function ExchangeForm() {
           <ExchangeSide
             allPokemons={allPokemons}
             pokemons={leftSide}
-            setPokemons={setLeftSide}
+            addPokemonToExchangeSide={setLeftSide}
             side="left"
           />
         </div>
@@ -60,7 +60,7 @@ export default function ExchangeForm() {
           <ExchangeSide
             allPokemons={allPokemons}
             pokemons={rightSide}
-            setPokemons={setRightSide}
+            addPokemonToExchangeSide={setRightSide}
             side="right"
           />
         </div>
