@@ -4,4 +4,7 @@ test:
 lint:
 	bundle exec rubocop
 
-ci: test lint
+test-js:
+	yarn test --ci
+
+ci: test lint test-js
