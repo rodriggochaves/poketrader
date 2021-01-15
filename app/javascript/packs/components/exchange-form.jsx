@@ -26,9 +26,12 @@ export default function ExchangeForm() {
   const [fair, setFair] = useFairness(leftPokemons, rightPokemons);
 
   async function submitForm() {
-    await postExchange(leftPokemons, rightPokemons);
-    alert("Exchange registered");
-    setFair(undefined);
+    try {
+      await postExchange(leftPokemons, rightPokemons);
+      alert("Exchange registered successfully");
+    } catch (error) {
+      alert("Error when registering exchange");
+    }
   }
 
   return (
