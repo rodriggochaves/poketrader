@@ -31,14 +31,23 @@ export default function ExchangeInput({ inputId, addPokemon }) {
     <>
       <AsyncTypeahead
         id={inputId}
-        isLoading={isLoading}
         filterBy={() => true}
         labelKey={(option) => option.name}
         options={pokemons}
         onSearch={handleSearch}
         onChange={onChange}
         minLength={3}
-      />
+      >
+        {() => (
+          <div className="rbt-aux">
+            {isLoading && (
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            )}
+          </div>
+        )}
+      </AsyncTypeahead>
       <p>Base experience: {renderBaseExperience(selectedPokemon)}</p>
     </>
   );
