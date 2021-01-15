@@ -1,6 +1,9 @@
 {
   "name": "poketrader",
   "private": true,
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.12.10",
     "@rails/actioncable": "^6.0.0",
@@ -17,6 +20,19 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@testing-library/react": "^11.2.3",
+    "babel-jest": "^26.6.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^26.6.3",
     "webpack-dev-server": "^3.11.1"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ]
   }
 }
