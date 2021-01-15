@@ -25,7 +25,7 @@ You can access three main pages:
 
 You can access these endpoints:
 
-- `GET /pokemons` to return all pokemons persisted
+- `GET /pokemons?query=` to search pokemons given a string
 - `GET /exchanges` to return all exchanges, as history
 - `POST /exchanges` to persiste new trades
 - `POST /exchanges/simulate` to check if a trade is fair or not
