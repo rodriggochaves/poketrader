@@ -7,7 +7,7 @@ pokemons, it says if was a fair or unfair trade, based on base experience status
 
 Core of application resides:
 
-- We have `app/commands` to handle domain transactions.
+- We have `app/services` to handle domain transactions.
 - We have `app/models` to abstract the domain entities.
 - We have `app/controllers` to handle web requests.
 - We have `app/javascript/poke-trader-app`. It is a React component to deliver a good experience when simulating
@@ -26,6 +26,7 @@ You can access three main pages:
 You can access these endpoints:
 
 - `GET /pokemons` to return all pokemons persisted
+- `GET /exchanges` to return all exchanges, as history
 - `POST /exchanges` to persiste new trades
 - `POST /exchanges/simulate` to check if a trade is fair or not
 
