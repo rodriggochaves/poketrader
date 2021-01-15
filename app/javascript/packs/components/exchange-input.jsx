@@ -30,6 +30,7 @@ export default function ExchangeInput({ inputId, addPokemon }) {
   return (
     <>
       <AsyncTypeahead
+        isLoading={false}
         id={inputId}
         filterBy={() => true}
         labelKey={(option) => option.name}
@@ -41,8 +42,8 @@ export default function ExchangeInput({ inputId, addPokemon }) {
         {() => (
           <div className="rbt-aux">
             {isLoading && (
-              <div class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
+              <div className="spinner-border spinner-border-sm" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>
             )}
           </div>
